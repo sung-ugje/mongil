@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %5p | %t | %-55logger{55} | L%L | %m %n</pattern>
+		</encoder>
+		<charset>UTF-8</charset>
+	</appender>
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/logs/openApi/OpenAPI.log</file>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/logs/openApi/OpenAPI.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d %5p | %t | %-55logger{55} | L%L | %m %n</pattern>
+		</encoder>
+		<charset>UTF-8</charset>
+	</appender>
+
+	<logger name="com.openapi">
+		<level value="debug" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="error" />
+	</logger>
+	<root>
+		<level value="debug" />
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>

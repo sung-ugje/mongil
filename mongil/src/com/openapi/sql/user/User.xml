@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.openapi.mapper.user.UserMapper">
+
+	<insert id="insertUser" parameterType="user" >
+		INSERT INTO /* [Token.xml][]insertToken][사용자 등록]*/
+			MG_USR_BASE (
+				USR_ID,
+				PWD,
+				USR_NM,
+				REG_DTIME,
+				CRET_DTIME,
+				CRET_USR_NO,
+				CRET_PGM_ID,
+				CHG_DTIME,
+				CHG_USR_NO,
+				CHG_PGM_ID
+  			) VALUES (
+			#{usrId}
+			, #{pwd}
+			, #{usrNm}
+			, NOW()
+			, NOW()
+			, 0
+			, #{pgmId}
+			, NOW()
+			, 0
+			, #{pgmId}
+		)
+		<selectKey resultType="long" keyProperty="usrNo" order="AFTER">
+			SELECT  LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	<select id="selectUserList" parameterType="user" resultType="user">
+		<include refid="CommonSql.pagingPrefix"/>
+		SELECT /* [User.xml][selectUserList] */
+				  USR_NO as usrNo
+				, USR_ID as usrId
+				, PWD as pwd
+				, USR_NM as usrNm
+				, REG_DTIME as regDtime
+				<include refid="CommonSql.totalRecordCount"/>
+			FROM
+				MG_USR_BASE
+			WHERE
+				1=1
+		<include refid="CommonSql.pagingSuffix"/>				
+	</select>
+
+</mapper>
