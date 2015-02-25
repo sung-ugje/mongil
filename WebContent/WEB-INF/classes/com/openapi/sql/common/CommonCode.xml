@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.openapi.mapper.common.CommonCodeMapper">
+
+	<select id="selectCommonCodeList" parameterType="commonCode" resultType="commonCode">
+		SELECT /* [CommonCode.xml][공통코드 목록조회]*/
+			  A.CD_GRP as cdGrp
+			, A.CD as cd
+			, A.LANG_TP as langTp
+			, A.CD_NM as cdNm
+			, A.CD_SEQ as cdSeq
+			, A.CD_DESC as cdDesc
+			, A.USE_YN as useYn
+			<!-- , TO_CHAR(A.CRET_DTIME, 'YYYYMMDDHH24MISS') as cretDtime
+			, A.CRET_USR_NO as crtrMgmtNo
+			, A.CRET_PGM_ID as cretPgmId
+			, TO_CHAR(A.CHG_DTIME, 'YYYYMMDDHH24MISS') as chgDtime
+			, A.CHG_USR_NO as pwuMgmtNo
+			, A.CHG_PGM_ID as chgPgmId -->
+		FROM
+			MG_CD_BASE  A
+		WHERE
+			1 = 1
+			AND A.USE_YN = 'Y'
+			<if test="!empty(cdGrp)">
+				AND A.CD_GRP = #{cdGrp}
+			</if>
+			<if test="!empty(langTp)">
+				AND A.LANG_TP = #{langTp}
+			</if>
+		ORDER BY
+			cdGrp, cdSeq
+	</select>
+	
+</mapper>
