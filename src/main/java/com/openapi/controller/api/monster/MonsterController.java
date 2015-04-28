@@ -1,5 +1,5 @@
 /**
- * 관리/전시 브랜드 Controller
+ * 몬스터 Controller
  */
 package com.openapi.controller.api.monster;
 
@@ -25,7 +25,7 @@ public class MonsterController extends BaseOpenApiController {
 
 
 	/**
-	 * 특정 관리브랜드에 대한 하위 전시브랜드 목록 조회
+	 * 몬스터 목록 조회
 	 * 
 	 * @param brndNo
 	 *            : 관리 브랜드 번호

@@ -1,5 +1,5 @@
 /**
- * 관리/전시 브랜드 Controller
+ * 사용자 Controller
  */
 package com.openapi.controller.api.user;
 
@@ -52,10 +52,8 @@ public class UserController extends BaseOpenApiController {
 	}
 
 	/**
-	 * 특정 관리브랜드에 대한 하위 전시브랜드 목록 조회
+	 * 사용자리스트
 	 * 
-	 * @param brndNo
-	 *            : 관리 브랜드 번호
 	 * @return
 	 * @throws Exception
 	 */
@@ -75,21 +73,4 @@ public class UserController extends BaseOpenApiController {
 		return userService.getUserList(user);
 	}
 
-	/**
-	 * 전시브랜드번호에 대한 전시브랜드속성번호 목록 조회
-	 * 
-	 * @param dispBrndNo
-	 *            : 전시 브랜드 번호
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/brand/disp/attr/list/{dispBrndNo}", method = RequestMethod.GET)
-	@ResponseBody
-	public List<User> getDispBrandAttrNoList(
-			@PathVariable("dispBrndNo") Integer dispBrndNo) throws Exception {
-
-		validator.checkEmpty(dispBrndNo, "전시 브랜드 번호");
-
-		return userService.getDispBrandAttrNoList(dispBrndNo);
-	}
 }
